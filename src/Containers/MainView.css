@@ -1,12 +1,11 @@
 .view-wrapper {
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  max-height: calc(100vh - 40px);
+  width: 2600px;
 }
 
 .template {
-  width: 1200px;
+  width: 2400px;
   height: 40px;
   display: flex;
 }

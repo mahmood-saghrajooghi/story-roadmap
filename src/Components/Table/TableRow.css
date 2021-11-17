@@ -1,7 +1,7 @@
 .table-row {
   display: flex;
   height: 150px;
-  width: 100%;
+  width: 2600px;
 }
 
 .table-row:nth-child(2n) {

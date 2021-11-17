@@ -16,6 +16,8 @@ interface TableRowProps {
   issues: any[];
 }
 
+const YEAR_BASE = moment({ year: 2019 });
+
 export const TableRow: React.FC<TableRowProps> = ({
   children,
   label,
@@ -25,6 +27,7 @@ export const TableRow: React.FC<TableRowProps> = ({
   const [detailsCardContent, setDetailsCardContent] = useState({});
   const [layout, setLayout] = useState(
     issues.map((issue) => {
+      const ms = issue.fields.timetracking.originalEstimateSeconds * 1000;
       const dueDate = moment(issue.fields.duedate);
       const estimate = moment(
         issue.fields.timetracking.originalEstimateSeconds * 1000
@@ -49,7 +52,6 @@ export const TableRow: React.FC<TableRowProps> = ({
   const handleDateChange = (item: { x: number; w: number }) => {
     const startInMs = getMilisecondsFromTablePosition(item.x);
     const endInMs = startInMs + getMilisecondsFromTablePosition(item.w);
-    const YEAR_BASE = moment({ year: 2019 });
 
     let formattedStartDate;
     if (startInMs > 0) {
