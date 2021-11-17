@@ -1,0 +1,16 @@
+.table-cell {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.table-cell:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

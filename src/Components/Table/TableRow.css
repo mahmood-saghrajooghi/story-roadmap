@@ -1,0 +1,74 @@
+.table-row {
+  display: flex;
+  height: 150px;
+  width: 100%;
+}
+
+.table-row:nth-child(2n) {
+  background-color: #f9f9f9;
+}
+.table-row:nth-child(2n + 1) {
+  background-color: #e8e8e8;
+}
+
+.Label {
+  padding: 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-row .react-grid-item {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.table-row .react-grid-item.react-draggable {
+  /* transition: opacity .2s; */
+  opacity: 1;
+}
+.table-row .react-grid-item.react-draggable.react-draggable-dragging {
+  opacity: 0.5;
+}
+
+.table-row .react-grid-item .react-resizable-handle.react-resizable-handle-e {
+  transform: none;
+  background-image: none;
+  top: 10px;
+  height: 100%;
+  width: 2px;
+  background: dodgerblue;
+  transition: 0.1s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.table-row
+  .react-grid-item:hover
+  .react-resizable-handle.react-resizable-handle-e {
+  visibility: visible;
+  opacity: 1;
+}
+
+.table-row
+  .react-grid-item
+  .react-resizable-handle.react-resizable-handle-e::after {
+  /* content: ""; */
+  display: none;
+  border-right: 1px solid #ccc;
+  right: 1px;
+  bottom: unset;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  border-bottom: none;
+}
+
+.table-row .react-grid-item.react-grid-placeholder.react-grid-placeholder {
+  background: none;
+  border: 2px dashed purple;
+  opacity: 1;
+  z-index: 2;
+  border-radius: 5px;
+}
