@@ -37,8 +37,6 @@ export const MainView: React.FC = () => {
             )}
           />
         ))}
-
-        <div className="current-time-tracker"></div>
       </div>
     </MainLayout>
   );

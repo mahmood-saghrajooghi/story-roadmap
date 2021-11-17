@@ -37,7 +37,7 @@ export const CellMoreInfo: React.FC<CellMoreInfoProps> = ({
           Due Date: {dueDate}
         </Text>
         <Text fontSize="xs" fontWeight="bold">
-          Estimate: {estimation}
+          Estimate: {estimation} weeks
         </Text>
       </Box>
       <Flex
