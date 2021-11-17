@@ -27,7 +27,6 @@ export const TableRow: React.FC<TableRowProps> = ({
   const [detailsCardContent, setDetailsCardContent] = useState({});
   const [layout, setLayout] = useState(
     issues.map((issue) => {
-      const ms = issue.fields.timetracking.originalEstimateSeconds * 1000;
       const dueDate = moment(issue.fields.duedate);
       const estimate = moment(
         issue.fields.timetracking.originalEstimateSeconds * 1000
