@@ -12,38 +12,30 @@ import { dataService } from "../../data/dataService";
 const GridLayoutResponsive = WidthProvider(GridLayout);
 
 interface TableRowProps {
-  label: string;
-  issues: any[];
+  issue: any;
 }
 
 const YEAR_BASE = moment({ year: 2019 });
 
-export const TableRow: React.FC<TableRowProps> = ({
-  children,
-  label,
-  issues,
-}) => {
+export const TableRow: React.FC<TableRowProps> = ({ children, issue }) => {
   const [showDetailsCard, setShowDetailsCard] = useState<boolean>(false);
   const [detailsCardContent, setDetailsCardContent] = useState({});
-  const [layout, setLayout] = useState(
-    issues.map((issue) => {
-      const dueDate = moment(issue.fields.duedate);
-      const estimate = moment(
-        issue.fields.timetracking.originalEstimateSeconds * 1000
-      );
-      const x =
-        dueDate.get("month") * 12 +
-        dueDate.get("weeks") * 3 +
-        dueDate.get("day");
+  const [layout, setLayout] = useState(() => {
+    const dueDate = moment(issue.fields.duedate).subtract({
+      seconds: issue.fields.timetracking.originalEstimateSeconds,
+    });
 
-      const w =
-        estimate.get("month") * 12 +
-        estimate.get("weeks") * 3 +
-        estimate.get("day");
+    const estimate = moment(
+      issue.fields.timetracking.originalEstimateSeconds * 1000
+    );
 
-      return { i: issue.id, x, y: 0, w, h: 1 };
-    })
-  );
+    const x = (dueDate.get("weeks") - 1) * 2 + dueDate.get("day");
+
+    const w = (estimate.get("weeks") - 1) * 2 + estimate.get("day");
+
+    return { i: issue.id, x, y: 0, w, h: 1 };
+  });
+
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const bodyRef = useRef<any>();
@@ -59,11 +51,6 @@ export const TableRow: React.FC<TableRowProps> = ({
       formattedStartDate = YEAR_BASE.format("YYYY MM DD");
     }
     const formattedEndDate = YEAR_BASE.add(endInMs).format("YYYY MM DD");
-
-    console.log({
-      dueDate: formattedStartDate,
-      estimation: formattedEndDate,
-    });
 
     dataService.post("/", {
       dueDate: formattedStartDate,
@@ -123,43 +110,38 @@ export const TableRow: React.FC<TableRowProps> = ({
   }, [showDetailsCard]);
 
   return (
-    <div className="table-row">
+    <div className="table-row child-row">
       <Flex
         p={5}
         fontWeight="bold"
-        fontSize="16px"
+        fontSize="12px"
         alignItems="center"
-        justifyContent="center"
-        w="200px"
+        w="384px"
         borderRight="1px solid #aaa"
       >
-        {label}
+        {issue.fields.summary}
       </Flex>
       <GridLayoutResponsive
         className="layout"
         autoSize={true}
-        rowHeight={30}
+        rowHeight={25}
         cols={12 * 12}
         resizeHandles={["e"]}
-        layout={layout}
         onLayoutChange={(v: any) => {
           setLayout(v);
         }}
         onResizeStop={(_, __, item) => handleDateChange(item)}
         onDragStop={(_, __, item) => handleDateChange(item)}
       >
-        {issues.map((issue) => {
-          return (
-            <div
-              key={issue.id}
-              style={{ overflow: "hidden" }}
-              onMouseEnter={handleMouseEnter.bind(this, issue)}
-              onMouseLeave={() => setShowDetailsCard(false)}
-            >
-              <TableCell>{issue.fields.summary}</TableCell>
-            </div>
-          );
-        })}
+        <div
+          key={issue.id}
+          data-grid={layout}
+          style={{ overflow: "hidden" }}
+          onMouseEnter={handleMouseEnter.bind(this, issue)}
+          onMouseLeave={() => setShowDetailsCard(false)}
+        >
+          <TableCell />
+        </div>
       </GridLayoutResponsive>
       {showDetailsCard ? (
         <div

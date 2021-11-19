@@ -1,12 +1,25 @@
 import { Flex, Text } from "@chakra-ui/layout";
-import React from "react";
+import React, { useRef } from "react";
 import "./TableCell.css";
 
+const colors = [
+  "gray",
+  "purple",
+  "green",
+  "yello",
+  "red",
+  "orange",
+  "teal",
+  "blue",
+  "cyan",
+  "pink",
+];
+
 export const TableCell: React.FC = ({ children }) => {
+  const bg = useRef(colors[Math.floor(Math.random() * colors.length)]);
   return (
     <Flex
-      bg="purple.100"
-      color="gray.800"
+      bg={`${bg.current}.300`}
       w="100%"
       h="100%"
       className="table-cell"

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { TableHeader } from "../Components/Table/TableHeader";
 import { TableRow } from "../Components/Table/TableRow";
+import data from "../data/sample.json";
 import { MainLayout } from "../Layouts/MainLayout";
 import "./MainView.css";
 
-import data from "../data/sample.json";
+console.log(data);
 
 export const MainView: React.FC = () => {
   // get unique labels from the data
@@ -21,22 +23,22 @@ export const MainView: React.FC = () => {
   return (
     <MainLayout>
       <div className="view-wrapper">
-        <TableRow
-          label="Roadmap"
+        <TableHeader
+          label="Epics"
           issues={data.issues.filter(
             (issue) =>
               issue.fields.issuetype.name.toLocaleLowerCase() === "epic" &&
               (issue.fields.labels as string[]).includes("Roadmap")
           )}
         />
-        {labels.map((label) => (
+        {/* {labels.map((label) => (
           <TableRow
             label={label}
             issues={data.issues.filter((issue) =>
               (issue.fields.labels as string[]).includes(label)
             )}
           />
-        ))}
+        ))} */}
       </div>
     </MainLayout>
   );

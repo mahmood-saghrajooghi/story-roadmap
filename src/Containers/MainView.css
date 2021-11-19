@@ -16,7 +16,7 @@
 }
 
 .template > *:first-child {
-  min-width: 200px;
+  min-width: 400px;
 }
 
 .current-time-tracker {

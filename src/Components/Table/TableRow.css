@@ -1,7 +1,11 @@
 .table-row {
   display: flex;
-  height: 150px;
+  height: 40px;
   width: 2600px;
+}
+
+.table-row.child-row {
+  padding-left: 16px;
 }
 
 .table-row:nth-child(2n) {
@@ -35,10 +39,12 @@
 .table-row .react-grid-item .react-resizable-handle.react-resizable-handle-e {
   transform: none;
   background-image: none;
-  top: 10px;
-  height: 100%;
-  width: 2px;
-  background: dodgerblue;
+  top: 14px;
+  right: 5px;
+  height: 70%;
+  width: 6px;
+  border-radius: 3px;
+  background: rgb(88, 88, 88);
   transition: 0.1s;
   visibility: hidden;
   opacity: 0;
@@ -54,15 +60,7 @@
 .table-row
   .react-grid-item
   .react-resizable-handle.react-resizable-handle-e::after {
-  /* content: ""; */
   display: none;
-  border-right: 1px solid #ccc;
-  right: 1px;
-  bottom: unset;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  border-bottom: none;
 }
 
 .table-row .react-grid-item.react-grid-placeholder.react-grid-placeholder {

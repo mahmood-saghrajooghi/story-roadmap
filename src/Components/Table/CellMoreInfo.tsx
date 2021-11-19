@@ -19,15 +19,15 @@ export const CellMoreInfo: React.FC<CellMoreInfoProps> = ({
 }) => {
   return (
     <Box w="300px" background="white" shadow="md" borderRadius="5px" p={3}>
-      <Flex>
-        <Text fontSize="sm" fontWeight="bold">
-          Project Key: {issueKey}
+      <Flex justifyContent="space-between">
+        <Text fontSize="xs" fontWeight="bold">
+          {summary}
+        </Text>
+        <Text fontSize="xs" fontWeight="bold">
+          {issueKey}
         </Text>
       </Flex>
       <Box pt={2} mt={2} borderTop="1px solid #ddd">
-        <Text fontSize="xs" fontWeight="bold" mb={2}>
-          {summary}
-        </Text>
         <Text fontSize="xs" mb={2}>
           {description}
         </Text>
@@ -35,9 +35,6 @@ export const CellMoreInfo: React.FC<CellMoreInfoProps> = ({
       <Box>
         <Text fontSize="xs" fontWeight="bold">
           Due Date: {dueDate}
-        </Text>
-        <Text fontSize="xs" fontWeight="bold">
-          Estimate: {estimation} weeks
         </Text>
       </Box>
       <Flex
@@ -49,7 +46,7 @@ export const CellMoreInfo: React.FC<CellMoreInfoProps> = ({
         borderTop="1px solid #ddd"
       >
         <Text fontSize="xs" fontWeight="Bold">
-          Tags:
+          Labels:
         </Text>
         <Flex>
           {labels?.map((l) => (
